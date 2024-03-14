@@ -17,6 +17,7 @@ export default function App() {
 
   const [playerScore, setPlayerScore] = useState([0,0,0]);
   const [opponentScore, setOpponentScore] = useState([0,0,0]);
+  const [turnInterval, changeTurn] = useState(true)
 
   useEffect (() =>{
     checkArrFull('player')
@@ -85,6 +86,7 @@ export default function App() {
           ];
           return newPlayerScore
         })
+        changeTurn(!turnInterval)
         return updatedArray;
       });
     } else {
@@ -103,7 +105,7 @@ export default function App() {
           ];
           return newOpponentScore
         })
-        checkArrFull('opponent')
+        changeTurn(!turnInterval)
         return updatedArray;
       });
     }
@@ -112,6 +114,11 @@ export default function App() {
   return (
     <div className="App">
       <h1>Array Items:</h1>
+      {turnInterval? (
+                <p>1</p>
+            ) : (
+                <p>2</p>
+            )}
       <h2>{playerScore[0]}, {playerScore[1]}, {playerScore[2]}</h2>
       <div className="diceGrid">
         <div className="diceRow" onClick={() => addDice(0, "player")}>
