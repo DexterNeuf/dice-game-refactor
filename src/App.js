@@ -64,11 +64,23 @@ export default function App() {
         return updatedArray;
       });
     } else {
-      setOpponentArray([
-        ...subjectArray.slice(0, rowNum),
-        reversedArray,
-        ...subjectArray.slice(rowNum + 1),
-      ]);
+      setOpponentArray((prevOpponentArray) => {
+        const updatedArray = [
+          ...prevOpponentArray.slice(0, rowNum),
+          reversedArray,
+          ...prevOpponentArray.slice(rowNum + 1),
+        ];
+        const calculatedScore = calculateScore(updatedArray[rowNum],rowNum)
+        setOpponentScore((prevOpponentScore) => {
+          const newOpponentScore = [
+            ...prevOpponentScore.slice(0,rowNum),
+            calculatedScore,
+            ...prevOpponentScore.slice(rowNum + 1),
+          ];
+          return newOpponentScore
+        })
+        return updatedArray;
+      });
     }
   };
 
