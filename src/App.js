@@ -223,6 +223,12 @@ export default function App() {
         <div className="gameOverContainer">
           <div className="gameOverBox">
             <h2>Game Over</h2>
+            {playerScore[0] + playerScore[1] + playerScore[2] >
+            opponentScore[0] + opponentScore[1] + opponentScore[2] ? (
+              <p>player won</p>
+            ) : (
+              <p>player lost</p>
+            )}
             <button onClick={resetGame}>Reset Game</button>
           </div>
         </div>
