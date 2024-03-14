@@ -14,10 +14,34 @@ export default function App() {
     [0, 0, 0],
     [0, 0, 0],
   ]);
-  const [playerScore, setPlayerScore] = useState([0,0,0]);
-  const [opponentScore, setOpponentScore] = useState([[], [], []]);
 
- 
+  const [playerScore, setPlayerScore] = useState([0,0,0]);
+  const [opponentScore, setOpponentScore] = useState([0,0,0]);
+
+  useEffect (() =>{
+    checkArrFull('player')
+  },[playerArray])
+
+  useEffect (() =>{
+    checkArrFull('opponent')
+  },[opponentArray])
+
+ const checkArrFull = (subject) =>{
+  let subjectArray = [];
+    if (subject === "player") {
+      subjectArray = playerArray;
+    } else {
+      subjectArray = opponentArray;
+    }
+    for (let i = 0; i < subjectArray.length; i++) {
+      for (let j = 0; j < subjectArray[i].length; j++) {
+          if (subjectArray[i][j] === 0) {
+              return false;
+          }
+      }
+  }
+  console.log('done');
+ }
 
   const renderDice = (index, subject) => {
     let rowItems;
@@ -79,6 +103,7 @@ export default function App() {
           ];
           return newOpponentScore
         })
+        checkArrFull('opponent')
         return updatedArray;
       });
     }
@@ -101,6 +126,7 @@ export default function App() {
           {renderDice(2, "player")}
         </div>
       </div>
+      <h2>{opponentScore[0]}, {opponentScore[1]}, {opponentScore[2]}</h2>
       <div className="diceGrid">
         <div className="diceRow" onClick={() => addDice(0, "opponent")}>
           {renderDice(0, "opponent")}
