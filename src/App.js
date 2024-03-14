@@ -18,6 +18,7 @@ export default function App() {
   const [playerScore, setPlayerScore] = useState([0, 0, 0]);
   const [opponentScore, setOpponentScore] = useState([0, 0, 0]);
   const [turnInterval, changeTurn] = useState(true);
+  const [gameOver, setGameOver] = useState(false);
 
   useEffect(() => {
     checkArrFull("player");
@@ -54,7 +55,7 @@ export default function App() {
         }
       }
     }
-    console.log("done");
+    setGameOver(true);
   };
 
   const renderDice = (index, subject) => {
@@ -124,8 +125,25 @@ export default function App() {
     }
   };
 
+  const resetGame = () => {
+    setPlayerArray([
+      [0, 0, 0],
+      [0, 0, 0],
+      [0, 0, 0],
+    ]);
+    setOpponentArray([
+      [0, 0, 0],
+      [0, 0, 0],
+      [0, 0, 0],
+    ]);
+    setPlayerScore([0, 0, 0]);
+    setOpponentScore([0, 0, 0]);
+    changeTurn(true); // Reset turn to player's turn
+    setGameOver(false); // Ensure game over state is reset
+  };
+
   return (
-    <div className="App">
+    <div div className={`App ${gameOver ? "gameOverMode" : ""}`}>
       <h1>Array Items:</h1>
       <h2>
         {playerScore[0]}, {playerScore[1]}, {playerScore[2]}
@@ -147,7 +165,7 @@ export default function App() {
           className="diceRow"
           onClick={() => {
             if (turnInterval && checkRowFull(1, "player")) {
-              addDice(0, "player");
+              addDice(1, "player");
             }
           }}
         >
@@ -157,7 +175,7 @@ export default function App() {
           className="diceRow"
           onClick={() => {
             if (turnInterval && checkRowFull(2, "player")) {
-              addDice(0, "player");
+              addDice(2, "player");
             }
           }}
         >
@@ -201,6 +219,14 @@ export default function App() {
           {renderDice(2, "opponent")}
         </div>
       </div>
+      {gameOver && (
+        <div className="gameOverContainer">
+          <div className="gameOverBox">
+            <h2>Game Over</h2>
+            <button onClick={resetGame}>Reset Game</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -21,11 +21,39 @@
 }
 
 .activeGrid {
-  /* Add styles for active grid */
+  font-size: auto;
 }
 
 .inactiveGrid {
   opacity: 0.5; /* Reduced opacity */
   filter: grayscale(75%); /* Apply grayscale filter */
+}
+.gameOverContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999; /* Ensure it's above other elements */
+}
 
+.gameOverBox {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  z-index: 100000; /* Ensure it's above other elements */
+}
+
+.gameOverMode {
+  pointer-events: none;
+}
+
+.gameOverMode button {
+  pointer-events: auto; /* Ensure the button remains clickable */
+  opacity: 1; /* Restore full opacity for the button */
 }
