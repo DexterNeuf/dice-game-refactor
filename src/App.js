@@ -15,20 +15,33 @@ export default function App() {
     [0, 0, 0],
   ]);
 
-  const [playerScore, setPlayerScore] = useState([0,0,0]);
-  const [opponentScore, setOpponentScore] = useState([0,0,0]);
-  const [turnInterval, changeTurn] = useState(true)
+  const [playerScore, setPlayerScore] = useState([0, 0, 0]);
+  const [opponentScore, setOpponentScore] = useState([0, 0, 0]);
+  const [turnInterval, changeTurn] = useState(true);
 
-  useEffect (() =>{
-    checkArrFull('player')
-  },[playerArray])
+  useEffect(() => {
+    checkArrFull("player");
+  }, [playerArray]);
 
-  useEffect (() =>{
-    checkArrFull('opponent')
-  },[opponentArray])
+  useEffect(() => {
+    checkArrFull("opponent");
+  }, [opponentArray]);
 
- const checkArrFull = (subject) =>{
-  let subjectArray = [];
+  const checkRowFull = (rowNum, subject) => {
+    let subjectArray = [];
+    if (subject === "player") {
+      subjectArray = playerArray;
+    } else {
+      subjectArray = opponentArray;
+    }
+    if (subjectArray[rowNum].every((item) => item !== 0)) {
+      console.log(`Row ${rowNum} is full`);
+      return false;
+    }
+    return true;
+  };
+  const checkArrFull = (subject) => {
+    let subjectArray = [];
     if (subject === "player") {
       subjectArray = playerArray;
     } else {
@@ -36,13 +49,13 @@ export default function App() {
     }
     for (let i = 0; i < subjectArray.length; i++) {
       for (let j = 0; j < subjectArray[i].length; j++) {
-          if (subjectArray[i][j] === 0) {
-              return false;
-          }
+        if (subjectArray[i][j] === 0) {
+          return false;
+        }
       }
-  }
-  console.log('done');
- }
+    }
+    console.log("done");
+  };
 
   const renderDice = (index, subject) => {
     let rowItems;
@@ -77,16 +90,16 @@ export default function App() {
           reversedArray,
           ...prevPlayerArray.slice(rowNum + 1),
         ];
-        const calculatedScore = calculateScore(updatedArray[rowNum],rowNum)
+        const calculatedScore = calculateScore(updatedArray[rowNum], rowNum);
         setPlayerScore((prevPlayerScore) => {
           const newPlayerScore = [
-            ...prevPlayerScore.slice(0,rowNum),
+            ...prevPlayerScore.slice(0, rowNum),
             calculatedScore,
             ...prevPlayerScore.slice(rowNum + 1),
           ];
-          return newPlayerScore
-        })
-        changeTurn(!turnInterval)
+          return newPlayerScore;
+        });
+        changeTurn(!turnInterval);
         return updatedArray;
       });
     } else {
@@ -96,16 +109,16 @@ export default function App() {
           reversedArray,
           ...prevOpponentArray.slice(rowNum + 1),
         ];
-        const calculatedScore = calculateScore(updatedArray[rowNum],rowNum)
+        const calculatedScore = calculateScore(updatedArray[rowNum], rowNum);
         setOpponentScore((prevOpponentScore) => {
           const newOpponentScore = [
-            ...prevOpponentScore.slice(0,rowNum),
+            ...prevOpponentScore.slice(0, rowNum),
             calculatedScore,
             ...prevOpponentScore.slice(rowNum + 1),
           ];
-          return newOpponentScore
-        })
-        changeTurn(!turnInterval)
+          return newOpponentScore;
+        });
+        changeTurn(!turnInterval);
         return updatedArray;
       });
     }
@@ -114,34 +127,77 @@ export default function App() {
   return (
     <div className="App">
       <h1>Array Items:</h1>
-      {turnInterval? (
-                <p>1</p>
-            ) : (
-                <p>2</p>
-            )}
-      <h2>{playerScore[0]}, {playerScore[1]}, {playerScore[2]}</h2>
-      <div className="diceGrid">
-        <div className="diceRow" onClick={() => addDice(0, "player")}>
+      <h2>
+        {playerScore[0]}, {playerScore[1]}, {playerScore[2]}
+      </h2>
+      <div
+        className={`diceGrid ${turnInterval ? "activeGrid" : "inactiveGrid"}`}
+      >
+        <div
+          className="diceRow"
+          onClick={() => {
+            if (turnInterval && checkRowFull(0, "player")) {
+              addDice(0, "player");
+            }
+          }}
+        >
           {renderDice(0, "player")}
-      
         </div>
-        <div className="diceRow" onClick={() => addDice(1, "player")}>
+        <div
+          className="diceRow"
+          onClick={() => {
+            if (turnInterval && checkRowFull(1, "player")) {
+              addDice(0, "player");
+            }
+          }}
+        >
           {renderDice(1, "player")}
-          
         </div>
-        <div className="diceRow" onClick={() => addDice(2, "player")}>
+        <div
+          className="diceRow"
+          onClick={() => {
+            if (turnInterval && checkRowFull(2, "player")) {
+              addDice(0, "player");
+            }
+          }}
+        >
           {renderDice(2, "player")}
         </div>
       </div>
-      <h2>{opponentScore[0]}, {opponentScore[1]}, {opponentScore[2]}</h2>
-      <div className="diceGrid">
-        <div className="diceRow" onClick={() => addDice(0, "opponent")}>
+      <h2>
+        {opponentScore[0]}, {opponentScore[1]}, {opponentScore[2]}
+      </h2>
+      <div
+        className={`diceGrid ${!turnInterval ? "activeGrid" : "inactiveGrid"}`}
+      >
+        <div
+          className="diceRow"
+          onClick={() => {
+            if (!turnInterval && checkRowFull(0, "opponent")) {
+              addDice(0, "opponent");
+            }
+          }}
+        >
           {renderDice(0, "opponent")}
         </div>
-        <div className="diceRow" onClick={() => addDice(1, "opponent")}>
+        <div
+          className="diceRow"
+          onClick={() => {
+            if (!turnInterval && checkRowFull(1, "opponent")) {
+              addDice(1, "opponent");
+            }
+          }}
+        >
           {renderDice(1, "opponent")}
         </div>
-        <div className="diceRow" onClick={() => addDice(2, "opponent")}>
+        <div
+          className="diceRow"
+          onClick={() => {
+            if (!turnInterval && checkRowFull(2, "opponent")) {
+              addDice(2, "opponent");
+            }
+          }}
+        >
           {renderDice(2, "opponent")}
         </div>
       </div>

@@ -19,3 +19,13 @@
   font-size: 24px;
   border-radius: 8px;
 }
+
+.activeGrid {
+  /* Add styles for active grid */
+}
+
+.inactiveGrid {
+  opacity: 0.5; /* Reduced opacity */
+  filter: grayscale(75%); /* Apply grayscale filter */
+
+}
