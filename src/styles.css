@@ -1,0 +1,21 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+.diceGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  justify-content: center;
+  align-items: center;
+  height: vh;
+  margin-bottom: 12px;
+}
+.diceGrid div {
+  background-color: #3498db;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  font-size: 24px;
+  border-radius: 8px;
+}
