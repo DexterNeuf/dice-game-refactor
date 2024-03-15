@@ -3,6 +3,7 @@ import calculateScore from "./RowCalc";
 import removeFromArray from "./removeFromArray";
 import React, { useEffect, useState } from "react";
 import { render } from "react-dom";
+import DiceAnimation from "./components/DiceAnimation";
 
 export default function App() {
   const [playerArray, setPlayerArray] = useState([
@@ -161,10 +162,8 @@ export default function App() {
 
   return (
     <div div className={`App ${gameOver ? "gameOverMode" : ""}`}>
-      <h1>Array Items:</h1>
-      <h2>
-        {playerScore[0]}, {playerScore[1]}, {playerScore[2]}
-      </h2>
+      <DiceAnimation passedNumber={randomNumber} />
+
       <div
         className={`diceGrid ${turnInterval ? "activeGrid" : "inactiveGrid"}`}
       >

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="32" height="32" viewBox="0 0 32 32" xml:space="preserve">
+<desc>Created with Fabric.js 4.6.0</desc>
+<defs>
+</defs>
+<g transform="matrix(1.06 0 0 1.06 15.95 15.91)" id="21J6j9oFeUBxVrOk9odB6"  >
+<path style="stroke: rgb(196,249,195); stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(228,228,228); fill-rule: nonzero; opacity: 1;" vector-effect="non-scaling-stroke"  transform=" translate(0, 0)" d="M -14.74098 -8.48691 C -14.74098 -11.94094 -11.940940000000001 -14.74098 -8.486910000000002 -14.74098 L 8.486909999999998 -14.74098 L 8.486909999999998 -14.74098 C 11.940939999999998 -14.74098 14.740979999999997 -11.940940000000001 14.740979999999997 -8.486910000000002 L 14.740979999999997 8.486919999999998 L 14.740979999999997 8.486919999999998 C 14.740979999999997 11.940949999999997 11.940939999999998 14.740989999999996 8.486909999999998 14.740989999999996 L -8.486910000000002 14.740989999999996 L -8.486910000000002 14.740989999999996 C -11.940940000000001 14.740989999999996 -14.74098 11.940949999999997 -14.74098 8.486919999999998 z" stroke-linecap="round" />
+</g>
+<g transform="matrix(1 0 0 1 15.95 16)" id="iaCAnGMGoW4xlfrpVX-wr"  >
+<path style="stroke: rgb(48,215,128); stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(0,0,0); fill-rule: nonzero; opacity: 1;" vector-effect="non-scaling-stroke"  transform=" translate(-1.75, -1.75)" d="M 1.7486338797814207 0 C 2.713879781420765 0 3.4972677595628414 0.7833879781420764 3.4972677595628414 1.7486338797814207 C 3.4972677595628414 2.713879781420765 2.713879781420765 3.4972677595628414 1.7486338797814207 3.4972677595628414 C 0.7833879781420764 3.4972677595628414 0 2.713879781420765 0 1.7486338797814207 C 0 0.7833879781420764 0.7833879781420764 0 1.7486338797814207 0 Z" stroke-linecap="round" />
+</g>
+</svg>
