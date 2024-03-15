@@ -1,5 +1,6 @@
 import "./styles.css";
 import calculateScore from "./RowCalc";
+import removeFromArray from "./removeFromArray";
 import React, { useEffect, useState } from "react";
 import { render } from "react-dom";
 
@@ -19,6 +20,9 @@ export default function App() {
   const [opponentScore, setOpponentScore] = useState([0, 0, 0]);
   const [turnInterval, changeTurn] = useState(true);
   const [gameOver, setGameOver] = useState(false);
+  const [randomNumber, setRandomNumber] = useState(
+    Math.floor(Math.random() * 6) + 1
+  );
 
   useEffect(() => {
     checkArrFull("player");
@@ -79,7 +83,8 @@ export default function App() {
     } else {
       subjectArray = opponentArray;
     }
-    const newNumber = Math.floor(Math.random() * 6) + 1;
+    const newNumber = randomNumber;
+    setRandomNumber(Math.floor(Math.random() * 6) + 1);
     let reversedArray = [...subjectArray[rowNum]].reverse();
     const emptySpace = reversedArray.indexOf(0);
     reversedArray[emptySpace] = newNumber;
@@ -103,6 +108,7 @@ export default function App() {
         changeTurn(!turnInterval);
         return updatedArray;
       });
+      setOpponentArray(removeFromArray(opponentArray, rowNum, newNumber));
     } else {
       setOpponentArray((prevOpponentArray) => {
         const updatedArray = [
@@ -122,7 +128,18 @@ export default function App() {
         changeTurn(!turnInterval);
         return updatedArray;
       });
+      setPlayerArray(removeFromArray(playerArray, rowNum, newNumber));
     }
+  };
+
+  const determineGameOutcome = () => {
+    const playerTotalScore = playerScore.reduce((acc, score) => acc + score, 0);
+    const opponentTotalScore = opponentScore.reduce(
+      (acc, score) => acc + score,
+      0
+    );
+
+    return playerTotalScore > opponentTotalScore ? "player won" : "player lost";
   };
 
   const resetGame = () => {
@@ -219,20 +236,20 @@ export default function App() {
           {renderDice(2, "opponent")}
         </div>
       </div>
-      {gameOver && (
-        <div className="gameOverContainer">
-          <div className="gameOverBox">
-            <h2>Game Over</h2>
-            {playerScore[0] + playerScore[1] + playerScore[2] >
-            opponentScore[0] + opponentScore[1] + opponentScore[2] ? (
-              <p>player won</p>
-            ) : (
-              <p>player lost</p>
-            )}
-            <button onClick={resetGame}>Reset Game</button>
+      <div className="App">
+        {/* Render game elements */}
+
+        {/* Conditional rendering for game over box and reset button */}
+        {gameOver && (
+          <div className="gameOverContainer">
+            <div className="gameOverBox">
+              <h2>Game Over</h2>
+              <p>{determineGameOutcome()}</p>
+              <button onClick={resetGame}>Reset Game</button>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }
