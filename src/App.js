@@ -1,9 +1,9 @@
-import "./styles.css";
-import calculateScore from "./RowCalc";
-import removeFromArray from "./removeFromArray";
-import React, { useEffect, useState } from "react";
-import { render } from "react-dom";
-import DiceAnimation from "./components/DiceAnimation";
+import './styles.css';
+import calculateScore from './RowCalc';
+import removeFromArray from './removeFromArray';
+import React, { useEffect, useState } from 'react';
+import { render } from 'react-dom';
+import DiceAnimation from './components/DiceAnimation';
 
 export default function App() {
   const [playerArray, setPlayerArray] = useState([
@@ -26,29 +26,28 @@ export default function App() {
   );
 
   useEffect(() => {
-    checkArrFull("player");
+    checkArrFull('player');
   }, [playerArray]);
 
   useEffect(() => {
-    checkArrFull("opponent");
+    checkArrFull('opponent');
   }, [opponentArray]);
 
   const checkRowFull = (rowNum, subject) => {
     let subjectArray = [];
-    if (subject === "player") {
+    if (subject === 'player') {
       subjectArray = playerArray;
     } else {
       subjectArray = opponentArray;
     }
     if (subjectArray[rowNum].every((item) => item !== 0)) {
-      console.log(`Row ${rowNum} is full`);
       return false;
     }
     return true;
   };
   const checkArrFull = (subject) => {
     let subjectArray = [];
-    if (subject === "player") {
+    if (subject === 'player') {
       subjectArray = playerArray;
     } else {
       subjectArray = opponentArray;
@@ -64,11 +63,11 @@ export default function App() {
   };
 
   const renderDice = (index, subject) => {
-    let rowItems;
-    if (subject === "player") {
-      rowItems = playerArray[index];
+    let rowItems = [];
+    if (subject === 'player') {
+      rowItems = [...playerArray[index]];
     } else {
-      rowItems = opponentArray[index];
+      rowItems = [...opponentArray[index]];
     }
     return rowItems.map((item, i) => (
       <div className="dice" key={i}>
@@ -79,7 +78,7 @@ export default function App() {
 
   const addDice = (rowNum, subject) => {
     let subjectArray = [];
-    if (subject === "player") {
+    if (subject === 'player') {
       subjectArray = playerArray;
     } else {
       subjectArray = opponentArray;
@@ -90,7 +89,7 @@ export default function App() {
     const emptySpace = reversedArray.indexOf(0);
     reversedArray[emptySpace] = newNumber;
     reversedArray = reversedArray.reverse();
-    if (subject === "player") {
+    if (subject === 'player') {
       setPlayerArray((prevPlayerArray) => {
         const updatedArray = [
           ...prevPlayerArray.slice(0, rowNum),
@@ -140,7 +139,7 @@ export default function App() {
       0
     );
 
-    return playerTotalScore > opponentTotalScore ? "player won" : "player lost";
+    return playerTotalScore > opponentTotalScore ? 'player won' : 'player lost';
   };
 
   const resetGame = () => {
@@ -161,78 +160,78 @@ export default function App() {
   };
 
   return (
-    <div div className={`App ${gameOver ? "gameOverMode" : ""}`}>
+    <div div className={`App ${gameOver ? 'gameOverMode' : ''}`}>
       <DiceAnimation passedNumber={randomNumber} />
 
       <div
-        className={`diceGrid ${turnInterval ? "activeGrid" : "inactiveGrid"}`}
+        className={`diceGrid ${turnInterval ? 'activeGrid' : 'inactiveGrid'}`}
       >
         <div
           className="diceRow"
           onClick={() => {
-            if (turnInterval && checkRowFull(0, "player")) {
-              addDice(0, "player");
+            if (turnInterval && checkRowFull(0, 'player')) {
+              addDice(0, 'player');
             }
           }}
         >
-          {renderDice(0, "player")}
+          {renderDice(0, 'player')}
         </div>
         <div
           className="diceRow"
           onClick={() => {
-            if (turnInterval && checkRowFull(1, "player")) {
-              addDice(1, "player");
+            if (turnInterval && checkRowFull(1, 'player')) {
+              addDice(1, 'player');
             }
           }}
         >
-          {renderDice(1, "player")}
+          {renderDice(1, 'player')}
         </div>
         <div
           className="diceRow"
           onClick={() => {
-            if (turnInterval && checkRowFull(2, "player")) {
-              addDice(2, "player");
+            if (turnInterval && checkRowFull(2, 'player')) {
+              addDice(2, 'player');
             }
           }}
         >
-          {renderDice(2, "player")}
+          {renderDice(2, 'player')}
         </div>
       </div>
       <h2>
         {opponentScore[0]}, {opponentScore[1]}, {opponentScore[2]}
       </h2>
       <div
-        className={`diceGrid ${!turnInterval ? "activeGrid" : "inactiveGrid"}`}
+        className={`diceGrid ${!turnInterval ? 'activeGrid' : 'inactiveGrid'}`}
       >
         <div
           className="diceRow"
           onClick={() => {
-            if (!turnInterval && checkRowFull(0, "opponent")) {
-              addDice(0, "opponent");
+            if (!turnInterval && checkRowFull(0, 'opponent')) {
+              addDice(0, 'opponent');
             }
           }}
         >
-          {renderDice(0, "opponent")}
+          {renderDice(0, 'opponent')}
         </div>
         <div
           className="diceRow"
           onClick={() => {
-            if (!turnInterval && checkRowFull(1, "opponent")) {
-              addDice(1, "opponent");
+            if (!turnInterval && checkRowFull(1, 'opponent')) {
+              addDice(1, 'opponent');
             }
           }}
         >
-          {renderDice(1, "opponent")}
+          {renderDice(1, 'opponent')}
         </div>
         <div
           className="diceRow"
           onClick={() => {
-            if (!turnInterval && checkRowFull(2, "opponent")) {
-              addDice(2, "opponent");
+            if (!turnInterval && checkRowFull(2, 'opponent')) {
+              addDice(2, 'opponent');
             }
           }}
         >
-          {renderDice(2, "opponent")}
+          {renderDice(2, 'opponent')}
         </div>
       </div>
       <div className="App">
@@ -253,4 +252,4 @@ export default function App() {
   );
 }
 
-render(<App />, document.getElementById("root"));
+render(<App />, document.getElementById('root'));

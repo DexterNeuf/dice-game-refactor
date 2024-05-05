@@ -1,20 +1,25 @@
 const removeFromArray = (subject, rowIndex, value) => {
   let updatedArray = subject;
   let row = updatedArray[rowIndex];
-  let removedCount = 0; // Variable to keep track of removed elements
 
-  // Loop through the row and replace occurrences of the value with 0
+  // Remove all instances of the value from the row
+  row = row.filter((element) => element !== value);
+
+  // Move remaining elements to the left
   for (let i = 0; i < row.length; i++) {
-    if (row[i] === value) {
-      row[i] = 0;
-      removedCount++;
-    } else if (removedCount > 0) {
-      // If there are removed elements, shift the current element to the left
-      row[i - removedCount] = row[i];
-      row[i] = 0; // Set the current element to 0 after shifting
+    if (row[i] === 0) {
+      row.splice(i, 1);
+      i--; // Adjust index after removing an element
     }
   }
 
+  // Fill the row with zeros to match the original length
+  while (row.length < subject[rowIndex].length) {
+    row.push(0);
+  }
+  row.reverse();
+  updatedArray.splice(rowIndex, rowIndex + 1, row);
+  console.log(updatedArray);
   return updatedArray;
 };
 

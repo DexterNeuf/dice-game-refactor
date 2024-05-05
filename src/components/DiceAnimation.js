@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from 'react';
 
 function DiceRolling(props) {
   const [dice, diceRoll] = useState(1);
@@ -24,7 +24,6 @@ function DiceRolling(props) {
   //run on first render
   useEffect(() => {
     diceAnimation();
-    console.log(props);
   }, []);
 
   return (
