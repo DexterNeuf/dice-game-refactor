@@ -1,6 +1,5 @@
 import './styles.css';
 import calculateScore from './RowCalc';
-import removeFromArray from './removeFromArray';
 import React, { useEffect, useState } from 'react';
 import { render } from 'react-dom';
 import DiceAnimation from './components/DiceAnimation';
@@ -108,7 +107,7 @@ export default function App() {
         changeTurn(!turnInterval);
         return updatedArray;
       });
-      setOpponentArray(removeFromArray(opponentArray, rowNum, newNumber));
+      removeFromArray(opponentArray, rowNum, newNumber, true);
     } else {
       setOpponentArray((prevOpponentArray) => {
         const updatedArray = [
@@ -128,7 +127,7 @@ export default function App() {
         changeTurn(!turnInterval);
         return updatedArray;
       });
-      setPlayerArray(removeFromArray(playerArray, rowNum, newNumber));
+      removeFromArray(playerArray, rowNum, newNumber, false);
     }
   };
 
@@ -157,6 +156,33 @@ export default function App() {
     setOpponentScore([0, 0, 0]);
     changeTurn(true); // Reset turn to player's turn
     setGameOver(false); // Ensure game over state is reset
+  };
+  const removeFromArray = (subject, rowIndex, value, ifPlayer) => {
+    let updatedArray = [...subject]; // Create a copy of the array
+    let row = [...updatedArray[rowIndex]]; // Create a copy of the row
+
+    // Remove all instances of the value from the row
+    row = row.filter((element) => element !== value);
+
+    // Move remaining elements to the left
+    for (let i = 0; i < row.length; i++) {
+      if (row[i] === 0) {
+        row.splice(i, 1);
+        i--; // Adjust index after removing an element
+      }
+    }
+
+    // Fill the row with zeros to match the original length
+    while (row.length < subject[rowIndex].length) {
+      row.push(0);
+    }
+    row.reverse();
+    updatedArray.splice(rowIndex, 1, row); // Replace the old row with the modified row
+    if (ifPlayer) {
+      setOpponentArray(updatedArray);
+    } else {
+      setPlayerArray(updatedArray);
+    }
   };
 
   return (
