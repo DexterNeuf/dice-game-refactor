@@ -26,6 +26,14 @@
     ); /* Adjust for smaller screens */
   }
 }
+.diceGrid div {
+  background-color: #3498db;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  font-size: 24px;
+  border-radius: 8px;
+}
 .dice {
   margin: 0 auto;
   background-image: url(../public/full-size-dice/dice0.svg);
@@ -35,14 +43,6 @@
   background-repeat: no-repeat;
   border-radius: 10%;
   background-size: 90%;
-}
-.diceGrid div {
-  background-color: #3498db;
-  color: #fff;
-  text-align: center;
-  padding: 20px;
-  font-size: 24px;
-  border-radius: 8px;
 }
 
 .activeGrid {
@@ -99,6 +99,68 @@
   min-height: 220px;
   margin: 10px auto;
   background-color: white;
+}
+
+.dice-animation-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.dice-animation-overlay.visible {
+  opacity: 1;
+}
+
+.dice-animation {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: scale(0.5);
+  transition: transform 0.3s ease-in-out;
+}
+
+.dice-animation.visible {
+  transform: scale(1);
+}
+
+.dice-animation .dice {
+  width: 100px;
+  height: 100px;
+  transition: all 0.1s ease-in-out; /* Increased from 0.1s to 0.3s */
+}
+
+/* Add specific transitions for each dice face if needed */
+.dice-animation .dice1 {
+  transition-delay: 0.05s;
+}
+.dice-animation .dice2 {
+  transition-delay: 0.1s;
+}
+.dice-animation .dice3 {
+  transition-delay: 0.15s;
+}
+.dice-animation .dice4 {
+  transition-delay: 0.2s;
+}
+.dice-animation .dice5 {
+  transition-delay: 0.25s;
+}
+.dice-animation .dice6 {
+  transition-delay: 0.3s;
 }
 
 /* Your dice classes remain unchanged */

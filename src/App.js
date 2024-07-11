@@ -32,10 +32,6 @@ export default function App() {
     checkArrFull("opponent");
   }, [opponentArray]);
 
-  useEffect(() => {
-    console.log("turnInterval changed:", turnInterval);
-  }, [turnInterval]);
-
   const checkRowFull = (rowNum, subject) => {
     let subjectArray = [];
     if (subject === "player") {
@@ -226,9 +222,9 @@ export default function App() {
           {renderDice(2, "player")}
         </div>
       </div>
-      <h2>
-        {opponentScore[0]}, {opponentScore[1]}, {opponentScore[2]}
-      </h2>
+      <div className="diceGrid">
+        <div className={` dice dice${randomNumber}`}></div>
+      </div>
       <div
         className={`diceGrid ${!turnInterval ? "activeGrid" : "inactiveGrid"}`}
       >
@@ -280,5 +276,3 @@ export default function App() {
     </div>
   );
 }
-
-render(<App />, document.getElementById("root"));
