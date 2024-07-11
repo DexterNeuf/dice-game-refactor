@@ -2,7 +2,7 @@ import "./styles.css";
 import calculateScore from "./RowCalc";
 import React, { useEffect, useState } from "react";
 import { render } from "react-dom";
-import DiceAnimation from "./components/DiceAnimation";
+import DiceAnimation from "./DiceAnimation";
 
 export default function App() {
   const [playerArray, setPlayerArray] = useState([
@@ -31,6 +31,10 @@ export default function App() {
   useEffect(() => {
     checkArrFull("opponent");
   }, [opponentArray]);
+
+  useEffect(() => {
+    console.log("turnInterval changed:", turnInterval);
+  }, [turnInterval]);
 
   const checkRowFull = (rowNum, subject) => {
     let subjectArray = [];
@@ -187,7 +191,7 @@ export default function App() {
 
   return (
     <div className={`App ${gameOver ? "gameOverMode" : ""}`}>
-      <DiceAnimation passedNumber={randomNumber} />
+      <DiceAnimation passedNumber={randomNumber} turnInterval={turnInterval} />
       <div
         className={`diceGrid ${turnInterval ? "activeGrid" : "inactiveGrid"}`}
       >

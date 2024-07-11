@@ -1,25 +1,39 @@
 import React, { useState, useEffect } from "react";
 
-const DiceAnimation = ({ passedNumber }) => {
+const DiceAnimation = ({ passedNumber, turnInterval }) => {
   const [currentNumber, setCurrentNumber] = useState(1);
-  const [isRolling, setIsRolling] = useState(true);
+  const [isRolling, setIsRolling] = useState(false);
 
   useEffect(() => {
-    let interval;
-    if (isRolling) {
-      interval = setInterval(() => {
-        setCurrentNumber(Math.floor(Math.random() * 6) + 1);
-      }, 100); // Change dice face every 100ms
+    console.log(
+      "Effect triggered. turnInterval:",
+      turnInterval,
+      "passedNumber:",
+      passedNumber
+    );
 
-      // Stop rolling after 1 second and show the passed number
-      setTimeout(() => {
-        setIsRolling(false);
-        setCurrentNumber(passedNumber);
-      }, 1000);
-    }
+    setIsRolling(true);
 
-    return () => clearInterval(interval);
-  }, [passedNumber, isRolling]);
+    const rollingInterval = setInterval(() => {
+      setCurrentNumber((prev) => {
+        const newNumber = Math.floor(Math.random() * 6) + 1;
+        console.log("Rolling, current number:", newNumber);
+        return newNumber;
+      });
+    }, 100);
+
+    const stopRollingTimeout = setTimeout(() => {
+      clearInterval(rollingInterval);
+      setIsRolling(false);
+      setCurrentNumber(passedNumber);
+      console.log("Rolling stopped. Final number:", passedNumber);
+    }, 1000);
+
+    return () => {
+      clearInterval(rollingInterval);
+      clearTimeout(stopRollingTimeout);
+    };
+  }, [passedNumber, turnInterval]);
 
   return (
     <div className="dice-animation">
