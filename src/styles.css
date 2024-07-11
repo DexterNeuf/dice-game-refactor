@@ -1,6 +1,8 @@
 .App {
   font-family: sans-serif;
   text-align: center;
+  max-width: 1024px;
+  margin: 0 auto;
 }
 
 .diceGrid {
@@ -24,7 +26,16 @@
     ); /* Adjust for smaller screens */
   }
 }
-
+.dice {
+  margin: 0 auto;
+  background-image: url(../public/full-size-dice/dice0.svg);
+  background-position: center;
+  width: 64px;
+  height: 64px;
+  background-repeat: no-repeat;
+  border-radius: 10%;
+  background-size: 90%;
+}
 .diceGrid div {
   background-color: #3498db;
   color: #fff;
@@ -95,67 +106,31 @@
 .dice1 {
   margin: 0 auto;
   background-image: url(../public/full-size-dice/dice1.svg);
-  background-position: center;
-  width: 128px;
-  height: 128px;
-  background-repeat: no-repeat;
-  border-radius: 10%;
-  background-size: 90%;
 }
 .dice2 {
   margin: 0 auto;
   background-image: url(../public/full-size-dice/dice2.svg);
-  background-position: center;
-  width: 128px;
-  height: 128px;
-  background-repeat: no-repeat;
-  border-radius: 10%;
-  background-size: 90%;
 }
 
 .dice3 {
   margin: 0 auto;
   background-image: url(../public/full-size-dice/dice3.svg);
-  background-position: center;
-  width: 128px;
-  height: 128px;
-  background-repeat: no-repeat;
-  border-radius: 10%;
-  background-size: 90%;
 }
 .dice4 {
   margin: 0 auto;
   background-image: url(../public/full-size-dice/dice4.svg);
-  background-position: center;
-  width: 128px;
-  height: 128px;
-  background-repeat: no-repeat;
-  border-radius: 10%;
-  background-size: 90%;
 }
 .dice5 {
   margin: 0 auto;
   background-image: url(../public/full-size-dice/dice5.svg);
-  background-position: center;
-  width: 128px;
-  height: 128px;
-  background-repeat: no-repeat;
-  border-radius: 10%;
-  background-size: 90%;
 }
 
 .dice6 {
   margin: 0 auto;
   background-image: url(../public/full-size-dice/dice6.svg);
-  background-position: center;
-  width: 128px;
-  height: 128px;
-  background-repeat: no-repeat;
-  border-radius: 10%;
-  background-size: 90%;
 }
 
-dice-roll-box {
-  max-width: 138px;
-  max-height: 138px;
+.dice-roll-box {
+  min-width: 138px;
+  min-height: 138px;
 }

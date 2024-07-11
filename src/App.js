@@ -70,7 +70,7 @@ export default function App() {
     }
     return rowItems.map((item, i) => (
       <div className={`dice dice${item}`} key={i}>
-        {item}
+        {" "}
       </div>
     ));
   };
@@ -186,9 +186,8 @@ export default function App() {
   };
 
   return (
-    <div div className={`App ${gameOver ? "gameOverMode" : ""}`}>
+    <div className={`App ${gameOver ? "gameOverMode" : ""}`}>
       <DiceAnimation passedNumber={randomNumber} />
-
       <div
         className={`diceGrid ${turnInterval ? "activeGrid" : "inactiveGrid"}`}
       >

@@ -1,29 +1,29 @@
 import React, { useState, useEffect } from "react";
 
-const DiceAnimation = ({ onFinish }) => {
+const DiceAnimation = ({ passedNumber }) => {
   const [currentNumber, setCurrentNumber] = useState(1);
-  const [animationSpeed, setAnimationSpeed] = useState(100); // Adjust the speed of animation as needed
+  const [isRolling, setIsRolling] = useState(true);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      // Generate random numbers from 1 to 6 for animation
-      const randomNumber = Math.floor(Math.random() * 6) + 1;
-      setCurrentNumber(randomNumber);
-    }, animationSpeed);
+    let interval;
+    if (isRolling) {
+      interval = setInterval(() => {
+        setCurrentNumber(Math.floor(Math.random() * 6) + 1);
+      }, 100); // Change dice face every 100ms
 
-    // Stop the animation after some time and settle on the final number
-    setTimeout(() => {
-      clearInterval(interval);
-      onFinish(currentNumber);
-    }, 2000); // Adjust the duration of animation as needed
+      // Stop rolling after 1 second and show the passed number
+      setTimeout(() => {
+        setIsRolling(false);
+        setCurrentNumber(passedNumber);
+      }, 1000);
+    }
 
     return () => clearInterval(interval);
-  }, [animationSpeed, currentNumber, onFinish]);
+  }, [passedNumber, isRolling]);
 
   return (
     <div className="dice-animation">
-      <h2>Rolling Dice</h2>
-      <div className="dice">{currentNumber}</div>
+      <div className={`dice dice${currentNumber}`}></div>
     </div>
   );
 };
