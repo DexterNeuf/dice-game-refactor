@@ -130,7 +130,7 @@
   justify-content: center;
   align-items: center;
   transform: scale(0.5);
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.2s ease-in-out;
 }
 
 .dice-animation.visible {
@@ -140,27 +140,6 @@
 .dice-animation .dice {
   width: 100px;
   height: 100px;
-  transition: all 0.1s ease-in-out; /* Increased from 0.1s to 0.3s */
-}
-
-/* Add specific transitions for each dice face if needed */
-.dice-animation .dice1 {
-  transition-delay: 0.05s;
-}
-.dice-animation .dice2 {
-  transition-delay: 0.1s;
-}
-.dice-animation .dice3 {
-  transition-delay: 0.15s;
-}
-.dice-animation .dice4 {
-  transition-delay: 0.2s;
-}
-.dice-animation .dice5 {
-  transition-delay: 0.25s;
-}
-.dice-animation .dice6 {
-  transition-delay: 0.3s;
 }
 
 /* Your dice classes remain unchanged */
