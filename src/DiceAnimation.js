@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 
 const DiceAnimation = ({ passedNumber, turnInterval }) => {
   const [currentNumber, setCurrentNumber] = useState(1);
-  const [margin, setMargin] = useState(25);
+  const [margin, setMargin] = useState(17.5);
   const [isRolling, setIsRolling] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -33,7 +33,7 @@ const DiceAnimation = ({ passedNumber, turnInterval }) => {
           setTimeout(() => {
             roll();
             setMargin((prevMargin) => {
-              const newMargin = prevMargin + 2.5;
+              const newMargin = prevMargin + 3;
               console.log('change margin', newMargin);
               return newMargin;
             });
@@ -42,9 +42,8 @@ const DiceAnimation = ({ passedNumber, turnInterval }) => {
           setCurrentNumber(passedNumber);
           setTimeout(() => {
             setIsVisible(false);
-            setTimeout(() => setIsRolling(false), 200);
-            setMargin(25);
-          }, 200);
+            setTimeout(() => setIsRolling(false), 300);
+          }, 300);
         }
       };
 
@@ -54,10 +53,11 @@ const DiceAnimation = ({ passedNumber, turnInterval }) => {
   );
 
   useEffect(() => {
+    setMargin(17.5);
     setIsRolling(true);
     setIsVisible(true);
 
-    const duration = 700; // Total duration of the roll in milliseconds
+    const duration = 600; // Total duration of the roll in milliseconds
 
     rollDice(duration);
 
@@ -73,7 +73,7 @@ const DiceAnimation = ({ passedNumber, turnInterval }) => {
       <div className={`dice-animation ${isVisible ? 'visible' : ''}`}>
         <div
           className={`dice dice${currentNumber}`}
-          style={{ marginleft: `${margin}px` }}
+          style={{ marginLeft: `${margin}px ` }}
         ></div>
       </div>
     </div>
