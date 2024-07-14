@@ -1,5 +1,6 @@
 import './styles.css';
 import calculateScore from './RowCalc';
+import checkForDuplicates from './checkDups';
 import React, { useEffect, useState } from 'react';
 import { render } from 'react-dom';
 import DiceAnimation from './DiceAnimation';
@@ -20,29 +21,35 @@ export default function App() {
   const [opponentScore, setOpponentScore] = useState([0, 0, 0]);
   const [turnInterval, changeTurn] = useState(true);
   const [gameOver, setGameOver] = useState(false);
+  const [moveCompleted, setMoveCompleted] = useState(false);
+  const [lastClicked, setLastClicked] = useState(0);
   const [randomNumber, setRandomNumber] = useState(
     Math.floor(Math.random() * 6) + 1
   );
-  const [playerCheckDuplicates, setPlayerCheckDuplicates] = useState([
+  const [playerDuplicates, setPlayerDuplicates] = useState([
     [0, 0, 0],
     [0, 0, 0],
     [0, 0, 0],
   ]);
-  const [opponentCheckDuplicates, setOpponentCheckDuplicates] = useState([
+  const [opponentDuplicates, setOpponentDuplicates] = useState([
     [0, 0, 0],
     [0, 0, 0],
     [0, 0, 0],
   ]);
 
-  const checkForDuplicates = (clickLocation) => {
-    let playerCopy = [...playerArray];
-    let opponentCopy = [...opponentArray];
+  useEffect(() => {
+    if (moveCompleted) {
+      duplicateWrapper();
+      setMoveCompleted(false); // Reset for the next move
+    }
+  }, [moveCompleted, playerArray, opponentArray]);
 
-    let playerDups = playerCopy[clickLocation[1]].reduce((acc, num) => {
-      acc[num] = (acc[num] || 0) + 1;
-    });
-    playerDups = playerCopy[clickLocation].maps((num) => playerDups[num]);
-    console.log(playerDups);
+  const duplicateWrapper = () => {
+    const playerCopy = [...playerArray];
+    const opponenetCopy = [...opponentArray];
+    let x = checkForDuplicates(playerCopy, lastClicked);
+    console.log(x);
+    // setplayerDuplicates(checkForDuplicates(playerArray, lastClicked));
   };
 
   useEffect(() => {
@@ -150,6 +157,7 @@ export default function App() {
       });
       removeFromArray(playerArray, rowNum, newNumber, false);
     }
+    setMoveCompleted(true);
   };
 
   const determineGameOutcome = () => {
@@ -215,7 +223,7 @@ export default function App() {
         <div
           className="diceRow"
           onClick={() => {
-            checkForDuplicates([0, 0]);
+            setLastClicked(0);
             if (turnInterval && checkRowFull(0, 'player')) {
               addDice(0, 'player');
             }
@@ -226,7 +234,7 @@ export default function App() {
         <div
           className="diceRow"
           onClick={() => {
-            checkForDuplicates([0, 1]);
+            setLastClicked(1);
             if (turnInterval && checkRowFull(1, 'player')) {
               addDice(1, 'player');
             }
@@ -237,7 +245,7 @@ export default function App() {
         <div
           className="diceRow"
           onClick={() => {
-            checkForDuplicates([0, 2]);
+            setLastClicked(2);
             if (turnInterval && checkRowFull(2, 'player')) {
               addDice(2, 'player');
             }
@@ -255,7 +263,7 @@ export default function App() {
         <div
           className="diceRow"
           onClick={() => {
-            checkForDuplicates([1, 0]);
+            setLastClicked(0);
             if (!turnInterval && checkRowFull(0, 'opponent')) {
               addDice(0, 'opponent');
             }
@@ -266,7 +274,7 @@ export default function App() {
         <div
           className="diceRow"
           onClick={() => {
-            checkForDuplicates([1, 1]);
+            setLastClicked(1);
             if (!turnInterval && checkRowFull(1, 'opponent')) {
               addDice(1, 'opponent');
             }
@@ -277,7 +285,7 @@ export default function App() {
         <div
           className="diceRow"
           onClick={() => {
-            checkForDuplicates([1, 2]);
+            setLastClicked(2);
             if (!turnInterval && checkRowFull(2, 'opponent')) {
               addDice(2, 'opponent');
             }
