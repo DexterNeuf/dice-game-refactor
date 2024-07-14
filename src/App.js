@@ -1,8 +1,8 @@
-import "./styles.css";
-import calculateScore from "./RowCalc";
-import React, { useEffect, useState } from "react";
-import { render } from "react-dom";
-import DiceAnimation from "./DiceAnimation";
+import './styles.css';
+import calculateScore from './RowCalc';
+import React, { useEffect, useState } from 'react';
+import { render } from 'react-dom';
+import DiceAnimation from './DiceAnimation';
 
 export default function App() {
   const [playerArray, setPlayerArray] = useState([
@@ -23,18 +23,39 @@ export default function App() {
   const [randomNumber, setRandomNumber] = useState(
     Math.floor(Math.random() * 6) + 1
   );
+  const [playerCheckDuplicates, setPlayerCheckDuplicates] = useState([
+    [0, 0, 0],
+    [0, 0, 0],
+    [0, 0, 0],
+  ]);
+  const [opponentCheckDuplicates, setOpponentCheckDuplicates] = useState([
+    [0, 0, 0],
+    [0, 0, 0],
+    [0, 0, 0],
+  ]);
+
+  const checkForDuplicates = (clickLocation) => {
+    let playerCopy = [...playerArray];
+    let opponentCopy = [...opponentArray];
+
+    let playerDups = playerCopy[clickLocation[1]].reduce((acc, num) => {
+      acc[num] = (acc[num] || 0) + 1;
+    });
+    playerDups = playerCopy[clickLocation].maps((num) => playerDups[num]);
+    console.log(playerDups);
+  };
 
   useEffect(() => {
-    checkArrFull("player");
+    checkArrFull('player');
   }, [playerArray]);
 
   useEffect(() => {
-    checkArrFull("opponent");
+    checkArrFull('opponent');
   }, [opponentArray]);
 
   const checkRowFull = (rowNum, subject) => {
     let subjectArray = [];
-    if (subject === "player") {
+    if (subject === 'player') {
       subjectArray = playerArray;
     } else {
       subjectArray = opponentArray;
@@ -46,7 +67,7 @@ export default function App() {
   };
   const checkArrFull = (subject) => {
     let subjectArray = [];
-    if (subject === "player") {
+    if (subject === 'player') {
       subjectArray = playerArray;
     } else {
       subjectArray = opponentArray;
@@ -63,21 +84,21 @@ export default function App() {
 
   const renderDice = (index, subject) => {
     let rowItems = [];
-    if (subject === "player") {
+    if (subject === 'player') {
       rowItems = [...playerArray[index]];
     } else {
       rowItems = [...opponentArray[index]];
     }
     return rowItems.map((item, i) => (
       <div className={`dice dice${item}`} key={i}>
-        {" "}
+        {' '}
       </div>
     ));
   };
 
   const addDice = (rowNum, subject) => {
     let subjectArray = [];
-    if (subject === "player") {
+    if (subject === 'player') {
       subjectArray = playerArray;
     } else {
       subjectArray = opponentArray;
@@ -88,7 +109,7 @@ export default function App() {
     const emptySpace = reversedArray.indexOf(0);
     reversedArray[emptySpace] = newNumber;
     reversedArray = reversedArray.reverse();
-    if (subject === "player") {
+    if (subject === 'player') {
       setPlayerArray((prevPlayerArray) => {
         const updatedArray = [
           ...prevPlayerArray.slice(0, rowNum),
@@ -138,7 +159,7 @@ export default function App() {
       0
     );
 
-    return playerTotalScore > opponentTotalScore ? "player won" : "player lost";
+    return playerTotalScore > opponentTotalScore ? 'player won' : 'player lost';
   };
 
   const resetGame = () => {
@@ -186,77 +207,83 @@ export default function App() {
   };
 
   return (
-    <div className={`App ${gameOver ? "gameOverMode" : ""}`}>
+    <div className={`App ${gameOver ? 'gameOverMode' : ''}`}>
       <DiceAnimation passedNumber={randomNumber} turnInterval={turnInterval} />
       <div
-        className={`diceGrid ${turnInterval ? "activeGrid" : "inactiveGrid"}`}
+        className={`diceGrid ${turnInterval ? 'activeGrid' : 'inactiveGrid'}`}
       >
         <div
           className="diceRow"
           onClick={() => {
-            if (turnInterval && checkRowFull(0, "player")) {
-              addDice(0, "player");
+            checkForDuplicates([0, 0]);
+            if (turnInterval && checkRowFull(0, 'player')) {
+              addDice(0, 'player');
             }
           }}
         >
-          {renderDice(0, "player")}
+          {renderDice(0, 'player')}
         </div>
         <div
           className="diceRow"
           onClick={() => {
-            if (turnInterval && checkRowFull(1, "player")) {
-              addDice(1, "player");
+            checkForDuplicates([0, 1]);
+            if (turnInterval && checkRowFull(1, 'player')) {
+              addDice(1, 'player');
             }
           }}
         >
-          {renderDice(1, "player")}
+          {renderDice(1, 'player')}
         </div>
         <div
           className="diceRow"
           onClick={() => {
-            if (turnInterval && checkRowFull(2, "player")) {
-              addDice(2, "player");
+            checkForDuplicates([0, 2]);
+            if (turnInterval && checkRowFull(2, 'player')) {
+              addDice(2, 'player');
             }
           }}
         >
-          {renderDice(2, "player")}
+          {renderDice(2, 'player')}
         </div>
       </div>
       <div className="diceGrid">
         <div className={` dice dice${randomNumber}`}></div>
       </div>
       <div
-        className={`diceGrid ${!turnInterval ? "activeGrid" : "inactiveGrid"}`}
+        className={`diceGrid ${!turnInterval ? 'activeGrid' : 'inactiveGrid'}`}
       >
         <div
           className="diceRow"
           onClick={() => {
-            if (!turnInterval && checkRowFull(0, "opponent")) {
-              addDice(0, "opponent");
+            checkForDuplicates([1, 0]);
+            if (!turnInterval && checkRowFull(0, 'opponent')) {
+              addDice(0, 'opponent');
             }
           }}
         >
-          {renderDice(0, "opponent")}
+          {renderDice(0, 'opponent')}
         </div>
         <div
           className="diceRow"
           onClick={() => {
-            if (!turnInterval && checkRowFull(1, "opponent")) {
-              addDice(1, "opponent");
+            checkForDuplicates([1, 1]);
+            if (!turnInterval && checkRowFull(1, 'opponent')) {
+              addDice(1, 'opponent');
             }
           }}
         >
-          {renderDice(1, "opponent")}
+          {renderDice(1, 'opponent')}
         </div>
         <div
           className="diceRow"
           onClick={() => {
-            if (!turnInterval && checkRowFull(2, "opponent")) {
-              addDice(2, "opponent");
+            checkForDuplicates([1, 2]);
+            if (!turnInterval && checkRowFull(2, 'opponent')) {
+              addDice(2, 'opponent');
             }
           }}
         >
-          {renderDice(2, "opponent")}
+          {renderDice(2, 'opponent')}
         </div>
       </div>
       <div className="App">

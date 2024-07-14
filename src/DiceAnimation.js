@@ -34,7 +34,6 @@ const DiceAnimation = ({ passedNumber, turnInterval }) => {
             roll();
             setMargin((prevMargin) => {
               const newMargin = prevMargin + 3;
-              console.log('change margin', newMargin);
               return newMargin;
             });
           }, interval);

@@ -1,4 +1,4 @@
-const calculateScore = (rowNumbers, rowNum) => {
+const calculateScore = (rowNumbers) => {
   // Create an object to store the occurrences of each item
   const occurrences = {};
 
