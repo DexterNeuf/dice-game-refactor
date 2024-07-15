@@ -99,13 +99,19 @@ export default function App() {
 
   const renderDice = (index, subject) => {
     let rowItems = [];
+    let duplicateItems = [];
     if (subject === 'player') {
       rowItems = [...playerArray[index]];
+      duplicateItems = [...playerDuplicates[index]];
     } else {
       rowItems = [...opponentArray[index]];
+      duplicateItems = [...opponentDuplicates[index]];
     }
     return rowItems.map((item, i) => (
-      <div className={`dice dice${item}`} key={i}>
+      <div
+        className={`dice dice${item} duplicate-amount${duplicateItems[i]}`}
+        key={i}
+      >
         {' '}
       </div>
     ));
