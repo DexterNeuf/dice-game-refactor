@@ -47,9 +47,17 @@ export default function App() {
   const duplicateWrapper = () => {
     const playerCopy = [...playerArray];
     const opponenetCopy = [...opponentArray];
-    let x = checkForDuplicates(playerCopy, lastClicked);
-    console.log(x);
-    // setplayerDuplicates(checkForDuplicates(playerArray, lastClicked));
+    let playerDuplicatesRow = checkForDuplicates(playerCopy, lastClicked);
+    let opponenetDuplicatesRow = checkForDuplicates(opponenetCopy, lastClicked);
+    setPlayerDuplicates((prePlayerDuplicates) => {
+      const newArr = [
+        ...prePlayerDuplicates.slice(0, lastClicked),
+        playerDuplicatesRow,
+        ...prePlayerDuplicates.slice(lastClicked + 1),
+      ];
+      console.log(newArr);
+      return newArr;
+    });
   };
 
   useEffect(() => {
