@@ -2,10 +2,11 @@ import './styles.css';
 import calculateScore from './RowCalc';
 import checkForDuplicates from './checkDups';
 import React, { useEffect, useState } from 'react';
-import { render } from 'react-dom';
+import TitleScreen from './TitleScreen';
 import DiceAnimation from './DiceAnimation';
 
 export default function App() {
+  const [showTitleScreen, setShowTitleScreen] = useState(true);
   const [playerArray, setPlayerArray] = useState([
     [0, 0, 0],
     [0, 0, 0],
@@ -235,6 +236,14 @@ export default function App() {
       setPlayerArray(updatedArray);
     }
   };
+
+  const startGame = () => {
+    setShowTitleScreen(false);
+  };
+
+  if (showTitleScreen) {
+    return <TitleScreen onStartGame={startGame} />;
+  }
 
   return (
     <div className={`App ${gameOver ? 'gameOverMode' : ''}`}>
