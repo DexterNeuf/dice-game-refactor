@@ -55,7 +55,14 @@ export default function App() {
         playerDuplicatesRow,
         ...prePlayerDuplicates.slice(lastClicked + 1),
       ];
-      console.log(newArr);
+      return newArr;
+    });
+    setOpponentDuplicates((preOpponentDuplicates) => {
+      const newArr = [
+        ...preOpponentDuplicates.slice(0, lastClicked),
+        opponenetDuplicatesRow,
+        ...preOpponentDuplicates.slice(lastClicked + 1),
+      ];
       return newArr;
     });
   };
@@ -107,13 +114,12 @@ export default function App() {
       rowItems = [...opponentArray[index]];
       duplicateItems = [...opponentDuplicates[index]];
     }
+    console.log('this is dup' + duplicateItems);
     return rowItems.map((item, i) => (
-      // <div
-      //   className={`dice dice${item} duplicate-amount${duplicateItems[i]}`}
-      //   key={i}
-      // >
-      //   {' '}
-      <div className={`dice dice${item} duplicate-amount${3}`} key={i}>
+      <div
+        className={`dice dice${item} duplicate-amount${duplicateItems[i]}`}
+        key={i}
+      >
         {' '}
       </div>
     ));
