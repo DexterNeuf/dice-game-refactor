@@ -36,13 +36,14 @@
 }
 .dice {
   margin: 0 auto;
-  background-image: url(../public/full-size-dice/dice0.svg);
+  background-image: url(../public/dice-filtered/dup3dice1.svg);
   background-position: center;
   width: 64px;
   height: 64px;
   background-repeat: no-repeat;
   border-radius: 10%;
   background-size: 90%;
+  position: relative;
 }
 
 .activeGrid {
@@ -148,27 +149,65 @@
   margin: 0 auto;
   background-image: url(../public/full-size-dice/dice1.svg);
 }
+.dice1.duplicate-amount2 {
+  background-image: url(../public/dice-filtered/dup2dice1.svg);
+}
+.dice1.duplicate-amount3 {
+  background-image: url(../public/dice-filtered/dup3dice1.svg);
+}
+
 .dice2 {
   margin: 0 auto;
   background-image: url(../public/full-size-dice/dice2.svg);
+}
+.dice2.duplicate-amount2 {
+  background-image: url(../public/dice-filtered/dup2dice2.svg);
+}
+.dice2.duplicate-amount3 {
+  background-image: url(../public/dice-filtered/dup3dice2.svg);
 }
 
 .dice3 {
   margin: 0 auto;
   background-image: url(../public/full-size-dice/dice3.svg);
 }
+.dice3.duplicate-amount2 {
+  background-image: url(../public/dice-filtered/dup2dice3.svg);
+}
+.dice3.duplicate-amount3 {
+  background-image: url(../public/dice-filtered/dup3dice3.svg);
+}
+
 .dice4 {
   margin: 0 auto;
   background-image: url(../public/full-size-dice/dice4.svg);
 }
+.dice4.duplicate-amount2 {
+  background-image: url(../public/dice-filtered/dup2dice4.svg);
+}
+.dice4.duplicate-amount3 {
+  background-image: url(../public/dice-filtered/dup3dice4.svg);
+}
+
 .dice5 {
   margin: 0 auto;
   background-image: url(../public/full-size-dice/dice5.svg);
 }
-
+.dice5.duplicate-amount2 {
+  background-image: url(../public/dice-filtered/dup2dice5.svg);
+}
+.dice5.duplicate-amount3 {
+  background-image: url(../public/dice-filtered/dup3dice5.svg);
+}
 .dice6 {
   margin: 0 auto;
   background-image: url(../public/full-size-dice/dice6.svg);
+}
+.dice6.duplicate-amount2 {
+  background-image: url(../public/dice-filtered/dup2dice6.svg);
+}
+.dice6.duplicate-amount3 {
+  background-image: url(../public/dice-filtered/dup3dice6.svg);
 }
 
 .dice-roll-box {

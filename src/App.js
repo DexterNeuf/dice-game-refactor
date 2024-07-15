@@ -108,10 +108,12 @@ export default function App() {
       duplicateItems = [...opponentDuplicates[index]];
     }
     return rowItems.map((item, i) => (
-      <div
-        className={`dice dice${item} duplicate-amount${duplicateItems[i]}`}
-        key={i}
-      >
+      // <div
+      //   className={`dice dice${item} duplicate-amount${duplicateItems[i]}`}
+      //   key={i}
+      // >
+      //   {' '}
+      <div className={`dice dice${item} duplicate-amount${3}`} key={i}>
         {' '}
       </div>
     ));
