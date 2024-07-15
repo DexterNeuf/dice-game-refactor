@@ -2,7 +2,7 @@ import './styles.css';
 import calculateScore from './RowCalc';
 import checkForDuplicates from './checkDups';
 import React, { useEffect, useState } from 'react';
-import TitleScreen from './TitleScreen';
+import TitleScreen from './TitleScreen.js';
 import DiceAnimation from './DiceAnimation';
 
 export default function App() {
@@ -41,6 +41,7 @@ export default function App() {
   useEffect(() => {
     if (moveCompleted) {
       duplicateWrapper();
+      changeScore(lastClicked);
       setMoveCompleted(false); // Reset for the next move
     }
   }, [moveCompleted, playerArray, opponentArray]);
@@ -65,6 +66,26 @@ export default function App() {
         ...preOpponentDuplicates.slice(lastClicked + 1),
       ];
       return newArr;
+    });
+  };
+  const changeScore = (rowNum) => {
+    const playerScoreRow = calculateScore(playerArray[rowNum]);
+    const opponentScoreRow = calculateScore(opponentArray[rowNum]);
+    setPlayerScore((prevPlayerScore) => {
+      const newPlayerScore = [
+        ...prevPlayerScore.slice(0, rowNum),
+        playerScoreRow,
+        ...prevPlayerScore.slice(rowNum + 1),
+      ];
+      return newPlayerScore;
+    });
+    setOpponentScore((prevOpponentScore) => {
+      const newOpponentScore = [
+        ...prevOpponentScore.slice(0, rowNum),
+        opponentScoreRow,
+        ...prevOpponentScore.slice(rowNum + 1),
+      ];
+      return newOpponentScore;
     });
   };
 
@@ -146,15 +167,15 @@ export default function App() {
           reversedArray,
           ...prevPlayerArray.slice(rowNum + 1),
         ];
-        const calculatedScore = calculateScore(updatedArray[rowNum], rowNum);
-        setPlayerScore((prevPlayerScore) => {
-          const newPlayerScore = [
-            ...prevPlayerScore.slice(0, rowNum),
-            calculatedScore,
-            ...prevPlayerScore.slice(rowNum + 1),
-          ];
-          return newPlayerScore;
-        });
+        // const calculatedScore = calculateScore(updatedArray[rowNum], rowNum);
+        // setPlayerScore((prevPlayerScore) => {
+        //   const newPlayerScore = [
+        //     ...prevPlayerScore.slice(0, rowNum),
+        //     calculatedScore,
+        //     ...prevPlayerScore.slice(rowNum + 1),
+        //   ];
+        //   return newPlayerScore;
+        // });
         changeTurn(!turnInterval);
         return updatedArray;
       });
@@ -166,16 +187,9 @@ export default function App() {
           reversedArray,
           ...prevOpponentArray.slice(rowNum + 1),
         ];
-        const calculatedScore = calculateScore(updatedArray[rowNum], rowNum);
-        setOpponentScore((prevOpponentScore) => {
-          const newOpponentScore = [
-            ...prevOpponentScore.slice(0, rowNum),
-            calculatedScore,
-            ...prevOpponentScore.slice(rowNum + 1),
-          ];
-          return newOpponentScore;
-        });
+        changeScore(rowNum);
         changeTurn(!turnInterval);
+
         return updatedArray;
       });
       removeFromArray(playerArray, rowNum, newNumber, false);
@@ -261,6 +275,7 @@ export default function App() {
           }}
         >
           {renderDice(0, 'player')}
+          <section>{playerScore[0]}</section>
         </div>
         <div
           className="diceRow"
@@ -272,7 +287,9 @@ export default function App() {
           }}
         >
           {renderDice(1, 'player')}
+          <section>{playerScore[1]}</section>
         </div>
+
         <div
           className="diceRow"
           onClick={() => {
@@ -283,6 +300,7 @@ export default function App() {
           }}
         >
           {renderDice(2, 'player')}
+          <section>{playerScore[2]}</section>
         </div>
       </div>
       <div className="diceGrid">
