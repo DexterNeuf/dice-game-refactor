@@ -167,15 +167,6 @@ export default function App() {
           reversedArray,
           ...prevPlayerArray.slice(rowNum + 1),
         ];
-        // const calculatedScore = calculateScore(updatedArray[rowNum], rowNum);
-        // setPlayerScore((prevPlayerScore) => {
-        //   const newPlayerScore = [
-        //     ...prevPlayerScore.slice(0, rowNum),
-        //     calculatedScore,
-        //     ...prevPlayerScore.slice(rowNum + 1),
-        //   ];
-        //   return newPlayerScore;
-        // });
         changeTurn(!turnInterval);
         return updatedArray;
       });
@@ -261,7 +252,12 @@ export default function App() {
 
   return (
     <div className={`App ${gameOver ? 'gameOverMode' : ''}`}>
-      <DiceAnimation passedNumber={randomNumber} turnInterval={turnInterval} />
+      {!gameOver && (
+        <DiceAnimation
+          passedNumber={randomNumber}
+          turnInterval={turnInterval}
+        />
+      )}
       <div
         className={`diceGrid ${turnInterval ? 'activeGrid' : 'inactiveGrid'}`}
       >
@@ -319,6 +315,7 @@ export default function App() {
           }}
         >
           {renderDice(0, 'opponent')}
+          <section>{opponentScore[0]}</section>
         </div>
         <div
           className="diceRow"
@@ -330,6 +327,7 @@ export default function App() {
           }}
         >
           {renderDice(1, 'opponent')}
+          <section>{opponentScore[1]}</section>
         </div>
         <div
           className="diceRow"
@@ -341,6 +339,7 @@ export default function App() {
           }}
         >
           {renderDice(2, 'opponent')}
+          <section>{opponentScore[2]}</section>
         </div>
       </div>
       <div className="App">

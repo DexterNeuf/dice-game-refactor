@@ -151,6 +151,9 @@
 }
 .dice1.duplicate-amount2 {
   background-image: url(../public/dice-filtered/dup2dice1.svg);
+  filter: none !important
+  ;
+  filter: contrast(200%);
 }
 .dice1.duplicate-amount3 {
   background-image: url(../public/dice-filtered/dup3dice1.svg);
@@ -162,6 +165,9 @@
 }
 .dice2.duplicate-amount2 {
   background-image: url(../public/dice-filtered/dup2dice2.svg);
+  filter: none !important
+  ;
+  filter: contrast(200%);
 }
 .dice2.duplicate-amount3 {
   background-image: url(../public/dice-filtered/dup3dice2.svg);
@@ -173,6 +179,7 @@
 }
 .dice3.duplicate-amount2 {
   background-image: url(../public/dice-filtered/dup2dice3.svg);
+  filter: none !important;
 }
 .dice3.duplicate-amount3 {
   background-image: url(../public/dice-filtered/dup3dice3.svg);
@@ -184,6 +191,7 @@
 }
 .dice4.duplicate-amount2 {
   background-image: url(../public/dice-filtered/dup2dice4.svg);
+  filter: none !important;
 }
 .dice4.duplicate-amount3 {
   background-image: url(../public/dice-filtered/dup3dice4.svg);
@@ -195,6 +203,7 @@
 }
 .dice5.duplicate-amount2 {
   background-image: url(../public/dice-filtered/dup2dice5.svg);
+  filter: none !important;
 }
 .dice5.duplicate-amount3 {
   background-image: url(../public/dice-filtered/dup3dice5.svg);
@@ -205,6 +214,7 @@
 }
 .dice6.duplicate-amount2 {
   background-image: url(../public/dice-filtered/dup2dice6.svg);
+  filter: none !important;
 }
 .dice6.duplicate-amount3 {
   background-image: url(../public/dice-filtered/dup3dice6.svg);
